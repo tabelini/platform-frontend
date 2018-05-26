@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
 import {UserService} from '../../../../../user.service';
+import {User, AuthenticationStatus} from 'platform-domain';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'fuse-login-2',
@@ -15,10 +17,14 @@ export class FuseLogin2Component implements OnInit {
   loginForm: FormGroup;
   loginFormErrors: any;
 
+  isLogging = false;
+  loginError = undefined;
+
   constructor(
     private fuseConfig: FuseConfigService,
     private formBuilder: FormBuilder,
-    private us: UserService
+    private us: UserService,
+    private router: Router
   ) {
     this.fuseConfig.setConfig({
       layout: {
@@ -43,9 +49,25 @@ export class FuseLogin2Component implements OnInit {
     this.loginForm.valueChanges.subscribe(() => {
       this.onLoginFormValuesChanged();
     });
+
+    this.us.user$.subscribe(user => {
+      this.isLogging = false;
+      if (user) {
+        if (user.authenticationStatus === AuthenticationStatus.LOGGING) {
+          this.isLogging = true;
+        } else if (user.authenticationStatus === AuthenticationStatus.LOGGED) {
+          this.router.navigateByUrl('/apps/dashboards/analytics');
+        } else if (user.authenticationStatus === AuthenticationStatus.WRONG_PASSWORD) {
+          this.loginError = 'Usuário ou senha incorretos!';
+        } else if (user.authenticationStatus === AuthenticationStatus.UNKNOWN_ERROR) {
+          this.loginError = 'Erro desconhecido ao logar!';
+        }
+      }
+    });
   }
 
   onLoginFormValuesChanged() {
+    this.loginError = undefined;
     for (const field in this.loginFormErrors) {
       if (!this.loginFormErrors.hasOwnProperty(field)) {
         continue;
