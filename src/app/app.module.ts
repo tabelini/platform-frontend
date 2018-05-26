@@ -57,17 +57,14 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes),
-
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FuseFakeDbService, {
             delay             : 0,
             passThruUnknownUrl: true
         }),
-
         // Fuse Main and Shared modules
         FuseModule.forRoot(fuseConfig),
         FuseSharedModule,
-
         AppStoreModule,
         FuseMainModule
     ],
