@@ -13,7 +13,7 @@ import { fuseAnimations } from '@fuse/animations';
 export class FuseAnalyticsDashboardComponent
 {
     widgets: any;
-    widget1SelectedYear = '2016';
+    widget1SelectedYear = '2017';
     widget5SelectedDay = 'today';
 
     constructor(

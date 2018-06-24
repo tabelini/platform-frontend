@@ -1,0 +1,77 @@
+<div id="ngx-datatable" class="page-layout simple fullwidth" fusePerfectScrollbar>
+
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-24 h-160" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+       fxLayoutAlign.gt-xs="space-between center">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="column" fxLayoutAlign.gt-xs="center start">
+      <div class="black-fg" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="secondary-text s-16">home</mat-icon>
+        <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
+        <span class="secondary-text">Cadastros</span>
+        <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
+        <span class="secondary-text">EndPoints</span>
+      </div>
+      <div class="h2 mt-16">Lista de EndPoints</div>
+    </div>
+
+    <a mat-raised-button class="reference-button mat-accent mt-16 mt-sm-0"
+       [routerLink]="'/endpoints/new'">
+      <mat-icon>fiber_new</mat-icon>
+      <span>Novo Endpoint</span>
+    </a>
+  </div>
+  <!-- / HEADER -->
+
+  <div class="content p-24">
+
+    <p class="mb-32">
+      Lista de todos os EndPoints cadastrados para este cliente. Antes que um endpoint seja utilizado o mesmo precisa
+      ser cadastrado, juntamente com as suas entradas e saídas.
+    </p>
+
+    <ngx-datatable
+      class="material"
+      [rows]="rows"
+      [loadingIndicator]="loadingIndicator"
+      [columnMode]="'force'"
+      [headerHeight]="48"
+      [footerHeight]="56"
+      [rowHeight]="'auto'"
+      [scrollbarH]="true"
+      [reorderable]="reorderable"
+      [selectionType]="'checkbox'"
+      [limit]="10">
+
+      <ngx-datatable-column [width]="48"
+                            [canAutoResize]="false"
+                            [sortable]="false">
+        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                     let-selectFn="selectFn">
+          <mat-checkbox [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"></mat-checkbox>
+        </ng-template>
+
+        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                     let-onCheckboxChangeFn="onCheckboxChangeFn">
+          <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Nome" prop="name">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a [routerLink]="'/endpoints/'+row.id">{{row.name}}</a>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Localização" prop="location"></ngx-datatable-column>
+
+      <ngx-datatable-column name="Tipo" prop="type"></ngx-datatable-column>
+
+      <ngx-datatable-column name="Id" prop="id">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a [routerLink]="'/endpoints/'+row.id">{{row.id}}</a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+
+  </div>
+</div>

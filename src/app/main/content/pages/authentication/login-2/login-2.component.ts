@@ -52,10 +52,12 @@ export class FuseLogin2Component implements OnInit {
 
     this.us.user$.subscribe(user => {
       this.isLogging = false;
+      console.log(`User subject: ${JSON.stringify(user)}`);
       if (user) {
         if (user.authenticationStatus === AuthenticationStatus.LOGGING) {
           this.isLogging = true;
         } else if (user.authenticationStatus === AuthenticationStatus.LOGGED) {
+          console.log('navigating to the analytics');
           this.router.navigateByUrl('/apps/dashboards/analytics');
         } else if (user.authenticationStatus === AuthenticationStatus.WRONG_PASSWORD) {
           this.loginError = 'Usuário ou senha incorretos!';

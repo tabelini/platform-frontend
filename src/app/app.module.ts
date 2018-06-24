@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
@@ -18,13 +18,19 @@ import {FuseMainModule} from './main/main.module';
 import {AppStoreModule} from './store/store.module';
 import {RoleGuard} from './role.guard';
 import {UserService} from './user.service';
+import { EndPointListComponent } from './end-point-list/end-point-list.component';
+import {MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {EndPointService} from './end-point.service';
+import {TokenInterceptor} from './token.interceptor';
+import { EndPointEditComponent } from './end-point-edit/end-point-edit.component';
 
 const appRoutes: Routes = [
   {
     path: 'apps',
     loadChildren: './main/content/apps/apps.module#FuseAppsModule',
     canActivate: [RoleGuard],
-    data: {roles: ['USER', 'USER_ADMIN']}
+    data: {roles: ['ROLE_ROOT', 'ROLE_USER', 'ROLE_ADMIN']}
   },
   {
     path: 'pages',
@@ -47,6 +53,18 @@ const appRoutes: Routes = [
     loadChildren: './main/content/components-third-party/components-third-party.module#FuseComponentsThirdPartyModule'
   },
   {
+    path: 'endpoints',
+    component: EndPointListComponent,
+    canActivate: [RoleGuard],
+    data: {roles: ['ROLE_ROOT', 'ROLE_USER', 'ROLE_ADMIN']}
+  },
+  {
+    path: 'endpoints/:id',
+    component: EndPointEditComponent,
+    canActivate: [RoleGuard],
+    data: {roles: ['ROLE_ROOT', 'ROLE_USER', 'ROLE_ADMIN']}
+  },
+  {
     path: '**',
     redirectTo: 'apps/dashboards/analytics'
   }
@@ -54,7 +72,9 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EndPointListComponent,
+    EndPointEditComponent
   ],
   imports: [
     BrowserModule,
@@ -70,9 +90,17 @@ const appRoutes: Routes = [
     FuseModule.forRoot(fuseConfig),
     FuseSharedModule,
     AppStoreModule,
-    FuseMainModule
+    FuseMainModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    NgxDatatableModule,
   ],
-  providers: [RoleGuard, UserService],
+  providers: [RoleGuard, UserService, EndPointService,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [
     AppComponent
   ]

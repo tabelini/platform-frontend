@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import {UserService} from '../../user.service';
 
 @Component({
     selector   : 'fuse-toolbar',
@@ -24,7 +25,8 @@ export class FuseToolbarComponent
         private router: Router,
         private fuseConfig: FuseConfigService,
         private sidebarService: FuseSidebarService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        public us: UserService
     )
     {
         this.userStatusOptions = [

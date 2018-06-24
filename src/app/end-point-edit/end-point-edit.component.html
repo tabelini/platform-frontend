@@ -1,0 +1,101 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column" fusePerfectScrollbar>
+
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-24 h-160" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+       fxLayoutAlign.gt-xs="space-between center">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="column" fxLayoutAlign.gt-xs="center start">
+      <div class="black-fg" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="secondary-text s-16">home</mat-icon>
+        <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
+        <span class="secondary-text">Cadastros</span>
+        <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
+        <span *ngIf="!(isNew$ | async)" class="secondary-text">{{(actualObj | async).name}}</span>
+        <span *ngIf="(isNew$ | async)" class="secondary-text">Novo Endpoint</span>
+      </div>
+      <div class="h2 mt-16">Edição de EndPoint</div>
+    </div>
+    <span>
+      <a *ngIf="(isNew$ | async)" mat-raised-button [disabled]="(form.invalid || (isSaving$ | async))"
+         class="reference-button mat-light-green-bg mt-16 mt-sm-0" (click)="save()">
+        <mat-icon>save</mat-icon>
+        <span>Salvar</span>
+      </a>
+      <a mat-raised-button class="reference-button mat-warn mt-16 mt-sm-0" (click)="remove()">
+        <mat-icon>delete</mat-icon>
+        <span *ngIf="!(isNew$ | async)">Remover</span>
+      <span *ngIf="(isNew$ | async)">Cancelar</span>
+    </a>
+    </span>
+  </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content p-24">
+
+    <div class="h1">
+      Novo Endpoint
+    </div>
+
+    <p class="pt-16 pb-32">
+      A criação de um novo endpoint é apenas o primeiro passo, pois além da criação do mesmo é importante associar novos
+      sensores e atuadores no mesmo.
+    </p>
+
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-md="row">
+
+      <!-- REACTIVE FORM EXAMPLE -->
+
+      <form class="mat-white-bg mat-elevation-z4 p-24 mr-24 mb-24" fxLayout="column" fxLayoutAlign="start"
+            fxFlex="1 0 auto" name="form" [formGroup]="form">
+
+        <div class="h2 mb-24">Dados do Endpoint</div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <mat-form-field>
+            <input matInput placeholder="Nome do Endpoint" formControlName="name">
+          </mat-form-field>
+          <mat-error *ngIf="formErrors.name.required">
+            Necessário informar o nome do Endpoint
+          </mat-error>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <mat-form-field>
+            <input matInput placeholder="Localização do Endpoint" formControlName="location">
+          </mat-form-field>
+          <mat-error *ngIf="formErrors.location.required">
+            Necessário informar a localização do Endpoint
+          </mat-error>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+          <mat-form-field fxFlex="50">
+            <mat-select placeholder="Tipo do Endpoint" formControlName="type" required>
+              <mat-option [value]="'SimpleIotBoard'">
+                Simple Iot Board
+              </mat-option>
+              <mat-option [value]="'ESP8266'">
+                ESP8266
+              </mat-option>
+              <mat-option [value]="'generic'">
+                Genérico
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formErrors.type.required">
+              Necessário selecionar o tipo do Endpoint
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </form>
+
+      <!-- / REACTIVE FORM EXAMPLE -->
+
+    </div>
+
+  </div>
+  <!-- / CONTENT -->
+
+</div>

@@ -5,8 +5,8 @@
         <div class="position-relative p-24 mat-blue-600-bg"
              fxLayout="row" fxLayoutAlign="space-between center">
             <div fxLayout="column" fxLayoutAlign="start start">
-                <span class="h2">Visitors</span>
-                <span class="h5 secondary-text">Unique visitors by month</span>
+                <span class="h2">Histórico de Medições</span>
+                <span class="h5 secondary-text">Medições por Mês</span>
             </div>
             <div fxLayout="row" fxLayoutAlign="start center">
                 <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer"
@@ -44,7 +44,7 @@
         <div class="left mr-32">
 
             <div class="pb-24 font-size-18 font-weight-300">
-                How are your active users trending over time?
+                Qual está sendo a economia de energia com o tempo?
             </div>
 
             <div fxLayout="column" fxLayoutAlign="start"
@@ -58,9 +58,9 @@
                         <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
 
                             <div class="pr-16">
-                                <div class="h3 secondary-text">Conversion</div>
+                                <div class="h3 secondary-text">Consumo Total</div>
                                 <div class="font-size-54 font-weight-300 line-height-1 mt-8">
-                                    {{widgets.widget2.conversion.value}}
+                                    45kWh
                                 </div>
                             </div>
 
@@ -75,7 +75,7 @@
                                     <mat-icon class="red-fg mr-4">trending_down</mat-icon>
                                     <span>{{widgets.widget2.conversion.ofTarget}}%</span>
                                 </div>
-                                <div class="ml-4 text-nowrap">of target</div>
+                                <div class="ml-4 text-nowrap">de economia</div>
                             </div>
 
                         </div>
@@ -103,7 +103,7 @@
                         <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
 
                             <div class="pr-16">
-                                <div class="h3 secondary-text">Impressions</div>
+                                <div class="h3 secondary-text">Acionamentos</div>
                                 <div class="font-size-54 font-weight-300 line-height-1 mt-8">
                                     {{widgets.widget3.impressions.value}}
                                 </div>
@@ -120,7 +120,7 @@
                                     <mat-icon class="red-fg mr-4">trending_down</mat-icon>
                                     <span>{{widgets.widget3.impressions.ofTarget}}%</span>
                                 </div>
-                                <div class="ml-4 text-nowrap">of target</div>
+                                <div class="ml-4 text-nowrap">de aumento</div>
                             </div>
 
                         </div>
@@ -148,9 +148,9 @@
                         <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
 
                             <div class="pr-16">
-                                <div class="h3 secondary-text">Visits</div>
+                                <div class="h3 secondary-text">Tempo Ligado</div>
                                 <div class="font-size-54 font-weight-300 line-height-1 mt-8">
-                                    {{widgets.widget4.visits.value}}
+                                    242hs
                                 </div>
                             </div>
 
@@ -165,7 +165,7 @@
                                     <mat-icon class="red-fg mr-4">trending_down</mat-icon>
                                     <span>{{widgets.widget4.visits.ofTarget}}%</span>
                                 </div>
-                                <div class="ml-4 text-nowrap">of target</div>
+                                <div class="ml-4 text-nowrap">de redução</div>
                             </div>
 
                         </div>
@@ -189,7 +189,7 @@
 
             <!-- Widget 5 -->
             <div class="pt-48 pb-24 font-size-18 font-weight-300">
-                How many pages your users visit?
+                Consumo total de energia por hora:
             </div>
 
             <div class="fuse-card auto-width">
@@ -197,18 +197,18 @@
                 <div class="position-relative p-24"
                      fxLayout="row" fxLayoutAlign="space-between center">
                     <div fxLayout="column" fxLayoutAlign="start start">
-                        <span class="h2">Visitors & Page views</span>
+                        <span class="h2">Consumo Wh x Hora</span>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start center">
                         <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer"
                              (click)="widget5SelectedDay = 'yesterday'"
                              [ngClass]="{'grey-300-bg': widget5SelectedDay === 'yesterday'}">
-                            Yesterday
+                            Ontem
                         </div>
                         <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer"
                              (click)="widget5SelectedDay = 'today'"
                              [ngClass]="{'grey-300-bg': widget5SelectedDay === 'today'}">
-                            Today
+                            Hoje
                         </div>
                     </div>
                 </div>
@@ -225,39 +225,6 @@
 
             </div>
             <!-- / Widget 5 -->
-
-            <!-- Widget 6 -->
-            <div class="pt-48 pb-24 font-size-18 font-weight-300">
-                Where are your users?
-            </div>
-
-            <div class="fuse-card auto-width p-16">
-
-                <agm-map class="h-640 w-100-p"
-                         [minZoom]="2"
-                         [maxZoom]="2"
-                         [fullscreenControl]="false"
-                         [rotateControl]="false"
-                         [zoomControl]="false"
-                         [scaleControl]="false"
-                         [streetViewControl]="false"
-                         [scrollwheel]="false"
-                         [styles]="widgets.widget6.styles">
-                    <agm-marker
-                        *ngFor="let marker of widgets.widget6.markers"
-                        [latitude]="marker.lat"
-                        [longitude]="marker.lng">
-
-                        <agm-info-window>
-                            <strong>{{marker.label}}</strong>
-                        </agm-info-window>
-
-                    </agm-marker>
-                </agm-map>
-
-            </div>
-            <!-- / Widget 6 -->
-
         </div>
 
         <div class="right">
@@ -268,13 +235,13 @@
                 <div class="mb-48" [ngClass.lt-lg]="'mr-32'">
 
                     <div class="pb-24 font-size-18 font-weight-300">
-                        What are your top devices?
+                        Quais os dispositivos mais ativos?
                     </div>
 
                     <div class="fuse-card">
 
                         <div class="p-16">
-                            <div class="h1 font-weight-300">Sessions by device</div>
+                            <div class="h1 font-weight-300">Acionamentos por Gatilho</div>
                         </div>
 
                         <div class="h-200">
@@ -312,193 +279,12 @@
                                 </div>
 
                             </div>
-
-                        </div>
-
-                        <div class="card-divider mb-0"></div>
-
-                        <div class="px-16" fxLayout="row" fxLayoutAlign="space-between center">
-                            <mat-form-field>
-                                <mat-select class="simplified" value="7days">
-                                    <mat-option value="today">Today</mat-option>
-                                    <mat-option value="yesterday">Yesterday</mat-option>
-                                    <mat-option value="7days">Last 7 days</mat-option>
-                                    <mat-option value="28days">Last 28 days</mat-option>
-                                    <mat-option value="90days">Last 90 days</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <button mat-button color="accent">OVERVIEW</button>
                         </div>
 
                     </div>
 
                 </div>
                 <!-- / Widget 7 -->
-
-                <!-- Widget 8 -->
-                <div class="mb-48" [ngClass.lt-lg]="'mr-32'">
-
-                    <div class="pb-24 font-size-18 font-weight-300">
-                        How are your sales?
-                    </div>
-
-                    <div class="fuse-card">
-
-                        <div class="mat-light-blue-600-bg">
-
-                            <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
-                                <div class="pr-16">
-                                    <div class="h1 font-weight-300">Sales</div>
-                                    <div class="h5 secondary-text">Lifetime sum of your sales</div>
-                                </div>
-
-                                <div>
-                                    <button mat-icon-button [matMenuTriggerFor]="card19Menu" aria-label="more">
-                                        <mat-icon>more_vert</mat-icon>
-                                    </button>
-
-                                    <mat-menu #card19Menu="matMenu">
-                                        <button mat-menu-item>
-                                            <mat-icon>trending_up</mat-icon>
-                                            <span>Trend</span>
-                                        </button>
-                                        <button mat-menu-item>
-                                            <mat-icon>history</mat-icon>
-                                            <span>History</span>
-                                        </button>
-                                        <button mat-menu-item>
-                                            <mat-icon>notifications_off</mat-icon>
-                                            <span>Disable alerts</span>
-                                        </button>
-                                    </mat-menu>
-                                </div>
-                            </div>
-
-                            <div class="p-16 pt-8" fxLayout="row" fxLayoutAlign="space-between end">
-                                <div class="font-size-48 font-weight-300 line-height-1">{{widgets.widget8.today}}</div>
-                                <div fxLayout="row" fxLayoutAlign="start center">
-                                    <mat-icon *ngIf="widgets.widget8.change.value > 0">trending_up</mat-icon>
-                                    <mat-icon *ngIf="widgets.widget8.change.value < 0">trending_down</mat-icon>
-                                    <div class="ml-8">{{widgets.widget8.change.value}}
-                                        ({{widgets.widget8.change.percentage}}%)
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <mat-tab-group backgroundColor="accent">
-                            <mat-tab label="1DAY">
-                                <div class="h-200 my-16">
-                                    <ngx-charts-line-chart
-                                        *fuseIfOnDom
-                                        [scheme]="widgets.widget8.scheme"
-                                        [results]="widgets.widget8.data"
-                                        [xAxis]="false"
-                                        [yAxis]="true"
-                                        [yScaleMin]="widgets.widget8.dataMin"
-                                        [yScaleMax]="widgets.widget8.dataMax">
-                                    </ngx-charts-line-chart>
-                                </div>
-                            </mat-tab>
-
-                            <mat-tab label="1WEEK">
-                                <div class="h-200 my-16">
-                                    <ngx-charts-line-chart
-                                        *fuseIfOnDom
-                                        [scheme]="widgets.widget8.scheme"
-                                        [results]="widgets.widget8.data"
-                                        [xAxis]="false"
-                                        [yAxis]="true"
-                                        [yScaleMin]="widgets.widget8.dataMin"
-                                        [yScaleMax]="widgets.widget8.dataMax">
-                                    </ngx-charts-line-chart>
-                                </div>
-                            </mat-tab>
-
-                            <mat-tab label="1MONTH">
-                                <div class="h-200 my-16">
-                                    <ngx-charts-line-chart
-                                        *fuseIfOnDom
-                                        [scheme]="widgets.widget8.scheme"
-                                        [results]="widgets.widget8.data"
-                                        [xAxis]="false"
-                                        [yAxis]="true"
-                                        [yScaleMin]="widgets.widget8.dataMin"
-                                        [yScaleMax]="widgets.widget8.dataMax">
-                                    </ngx-charts-line-chart>
-                                </div>
-                            </mat-tab>
-                        </mat-tab-group>
-
-                    </div>
-
-                </div>
-
-                <!-- / Widget 8 -->
-
-                <!-- Widget 9 -->
-                <div class="mb-48" [ngClass.lt-lg]="'mr-32'">
-
-                    <div class="pb-24 font-size-18 font-weight-300" [ngClass.lt-lg]="'pt-0'">
-                        What are your top campaigns?
-                    </div>
-
-                    <div class="fuse-card">
-
-                        <div class="p-16" fxLayout="row" fxLayoutAlign="space-between center">
-                            <div class="h1 pr-16">Top campaigns</div>
-
-                            <div>
-                                <button mat-icon-button [matMenuTriggerFor]="card20Menu" aria-label="more">
-                                    <mat-icon>more_vert</mat-icon>
-                                </button>
-
-                                <mat-menu #card20Menu="matMenu">
-                                    <button fxLayout="row" fxLayoutAlign="start center" mat-menu-item>
-                                        <mat-icon color="accent">check_box</mat-icon>
-                                        <span>Show Clicks</span>
-                                    </button>
-                                    <button fxLayout="row" fxLayoutAlign="start center" mat-menu-item>
-                                        <mat-icon color="accent">check_box</mat-icon>
-                                        <span>Show Conversion</span>
-                                    </button>
-                                    <button fxLayout="row" fxLayoutAlign="start center" mat-menu-item>
-                                        <mat-icon>check_box_outline_blank</mat-icon>
-                                        <span>Show CPC</span>
-                                    </button>
-                                </mat-menu>
-                            </div>
-                        </div>
-
-                        <table class="simple clickable">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th class="text-right">Clicks</th>
-                                    <th class="text-right">Conv</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let row of widgets.widget9.rows">
-                                    <td>{{row.title}}</td>
-                                    <td class="text-right">{{row.clicks}}</td>
-                                    <td class="text-right">{{row.conversion}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="card-divider full-width"></div>
-
-                        <div class="p-8 pt-16" fxLayout="row" fxLayoutAlign="start center">
-                            <button mat-button color="accent">GO TO CAMPAIGNS</button>
-                        </div>
-
-                    </div>
-
-                </div>
-                <!-- / widget 9 -->
 
             </div>
 
